@@ -10,6 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        projectPath:
+          - ./
         targetPlatform:
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
           - WebGL # WebGL.
@@ -20,7 +22,7 @@ jobs:
           lfs: true
       - uses: actions/cache@v2
         with:
-          path: Library
+          path: ${{ matrix.projectPath }}/Library
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
       - uses: game-ci/unity-builder@v2
